@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Black Ops One", "Chakra Petch", sans-serif;
+  --font-body: "Chakra Petch", "Segoe UI", sans-serif;
+  --color-acid: #9dff3d;
+  --color-amber-warn: #ffb02e;
+  --color-cyan-x: #4de3ff;
+  --color-threat: #ff5964;
+  --color-pit: #070d0b;
+  --color-panel: #0c1a14;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+/* ---------- HUD panels with corner brackets ---------- */
+.panel {
+  position: relative;
+  background: rgba(10, 22, 17, 0.88);
+  box-shadow: 0 0 0 1px rgba(157, 255, 61, 0.16), 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.panel::before,
+.panel::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.panel::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid rgba(157, 255, 61, 0.85);
+  border-left: 2px solid rgba(157, 255, 61, 0.85);
+}
+.panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid rgba(157, 255, 61, 0.85);
+  border-right: 2px solid rgba(157, 255, 61, 0.85);
+}
+
+/* ---------- keycap chip ---------- */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.55rem;
+  height: 1.55rem;
+  padding: 0 0.35rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #d8ffe9;
+  background: linear-gradient(180deg, #1c2f26, #0d1a14);
+  border: 1px solid rgba(157, 255, 61, 0.4);
+  border-bottom-width: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- hazard stripes ---------- */
+.hazard {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffb02e 0 14px,
+    #101815 14px 28px
+  );
+}
+.hazard-dim {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 176, 46, 0.55) 0 10px,
+    rgba(10, 15, 13, 0.9) 10px 20px
+  );
+}
+
+/* ---------- scanlines overlay ---------- */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(190, 255, 214, 0.035) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: screen;
+}
+
+/* ---------- angled buttons ---------- */
+.clip-btn {
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+}
+
+/* ---------- animations ---------- */
+@keyframes bannerIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.7);
+    letter-spacing: 0.4em;
+    filter: blur(6px);
+  }
+  14% {
+    opacity: 1;
+    transform: scale(1);
+    letter-spacing: 0.12em;
+    filter: blur(0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+.banner-anim {
+  animation: bannerIn 2.6s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
+}
+
+@keyframes blinkWarn {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.blink {
+  animation: blinkWarn 0.9s steps(2, start) infinite;
+}
+
+@keyframes titleFlicker {
+  0%, 100% { text-shadow: 0 0 18px rgba(157, 255, 61, 0.45), 0 0 60px rgba(157, 255, 61, 0.15); }
+  46% { text-shadow: 0 0 18px rgba(157, 255, 61, 0.45), 0 0 60px rgba(157, 255, 61, 0.15); }
+  48% { text-shadow: 0 0 6px rgba(157, 255, 61, 0.2); }
+  50% { text-shadow: 0 0 22px rgba(157, 255, 61, 0.6), 0 0 80px rgba(157, 255, 61, 0.25); }
+  52% { text-shadow: 0 0 18px rgba(157, 255, 61, 0.45); }
+}
+.title-flicker {
+  animation: titleFlicker 4.2s infinite;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise-in {
+  animation: riseIn 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+@keyframes deployPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(157, 255, 61, 0.55), 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 9px rgba(157, 255, 61, 0), 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+.deploy-pulse {
+  animation: deployPulse 1.6s ease-out infinite;
+}
+
+@keyframes statPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.stat-pop {
+  animation: statPop 0.45s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
