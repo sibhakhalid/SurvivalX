@@ -2,9 +2,9 @@
 
 A top-down survival shooter. Fight through enemy waves, collect drops, and beat your high score.
 
-## Play
+## Source code
 
-Open the [latest version on GitHub](https://github.com/sibhakhalid/SurvivalX). To run the game locally, use the steps below.
+The [SurvivalX GitHub repository](https://github.com/sibhakhalid/SurvivalX) contains the game source. Run it locally using the steps below.
 
 ## Controls
 
